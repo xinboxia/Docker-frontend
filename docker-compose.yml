@@ -1,0 +1,26 @@
+version: '3'
+#container 1 for running Apps
+services:
+  web:
+    stdin_open: true
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes: 
+      # do not map folder inside container to this modules
+      - /app/node_modules 
+      # map whatever inside current folder locally to /app inside container
+      - .:/app
+  # container 2 for tests
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: 
+      # do not map folder inside container to this modules
+      - /app/node_modules 
+      # map whatever inside current folder locally to /app inside container
+      - .:/app
+    command: ["npm", "run", "test"]
