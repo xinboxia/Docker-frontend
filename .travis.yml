@@ -11,17 +11,15 @@ before_install:
 script:
   - docker run -e CI=true xinboxia/docker-react npm run test
 
-region: us-west-1
+deploy: 
+  region: us-west-1
+  app: docker-web
+  env: DockerWeb-env
+  bucket_name: elasticbeanstalk-us-west-1-762283273395
+  bucket_path: docker
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  on: 
+    branch: master
 
-app: docker-web
-
-env: DockerWeb-env
-
-bucket_name: elasticbeanstalk-us-west-1-762283273395
-
-bucket_path: docker
-
-access_key_id: AKIA3C647VSZUHJZO27M
-
-secret_access_key: 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
 
